@@ -3,41 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Биография Ильи Моисеева</title>
+    <title>ILYAMOISEEV // GAMER PROFILE</title>
     <style>
-        /* --- БАЗОВЫЕ СТИЛИ --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Oswald:wght@500;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --valorant-red: #FF4655;
+            --valorant-dark: #0F1923;
+            --valorant-light: #ECE8E1;
+            --dota-gold: #C8AA6E;
         }
 
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            color: #fff;
+            color: var(--valorant-light);
             overflow-x: hidden;
-            
-            /* Фон с вашей фотографией */
+            font-family: 'Rajdhani', sans-serif;
             background-image: url('background.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            background-color: rgba(0, 0, 0, 0.75);
-            background-blend-mode: overlay;
+            background-color: rgba(15, 25, 35, 0.85);
+            background-blend-mode: multiply;
         }
 
-        /* --- ШАПКА (HEADER) --- */
         header {
             display: flex;
             width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background: rgba(15, 25, 35, 0.95);
+            border-bottom: 2px solid var(--valorant-red);
+            box-shadow: 0 4px 30px rgba(255, 70, 85, 0.3);
             z-index: 100;
             position: sticky;
             top: 0;
@@ -47,7 +47,7 @@
             flex: 1;
             padding: 20px 10px;
             text-align: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 70, 85, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -58,391 +58,461 @@
             overflow: hidden;
         }
 
-        header .col:last-child {
-            border-right: none;
+        header .col:last-child { border-right: none; }
+
+        header .col::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 70, 85, 0.2), transparent);
+            transition: left 0.6s ease;
         }
 
+        header .col:hover::before { left: 100%; }
+
         header .col:hover .icon-circle {
-            transform: scale(1.15) rotate(10deg);
-            box-shadow: 0 0 25px rgba(142, 68, 173, 0.8);
+            transform: scale(1.15) rotate(-5deg);
+            box-shadow: 0 0 30px rgba(255, 70, 85, 0.9);
+            border-color: var(--valorant-red);
         }
 
         header .col.active .icon-circle {
-            background: linear-gradient(135deg, #8e44ad, #4a90e2);
-            box-shadow: 0 0 30px rgba(74, 144, 226, 0.9);
+            background: var(--valorant-red);
+            box-shadow: 0 0 35px rgba(255, 70, 85, 1);
             transform: scale(1.1);
+            border-color: #fff;
         }
 
         header .col.active span {
-            color: #4a90e2;
-            font-weight: bold;
+            color: var(--valorant-red);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 70, 85, 0.8);
         }
 
-        /* Круглые иконки */
         .icon-circle {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #4a90e2, #8e44ad);
+            width: 60px; height: 60px;
+            background: rgba(15, 25, 35, 0.9);
+            border: 2px solid rgba(255, 70, 85, 0.4);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 15px rgba(255, 70, 85, 0.2);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .icon-circle svg {
-            width: 30px;
-            height: 30px;
-            fill: #fff;
-            transition: transform 0.3s ease;
+        .icon-circle svg { width: 28px; height: 28px; fill: var(--valorant-light); }
+
+        header .col span {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            transition: all 0.3s ease;
         }
 
-        header .col:hover .icon-circle svg {
-            transform: scale(1.1);
-        }
-
-        /* --- ОСНОВНОЙ КОНТЕНТ (MAIN) --- */
         main {
             flex: 1;
-            padding: 40px 20px;
-            max-width: 1000px;
+            padding: 50px 20px;
+            max-width: 1100px;
             margin: 0 auto;
             width: 100%;
-            position: relative;
         }
 
-        /* Скрываем все секции по умолчанию */
-        .section {
-            display: none;
-        }
+        .section { display: none; }
 
-        /* Показываем активную секцию */
         .section.active {
             display: block;
-            animation: fadeIn 0.5s ease forwards;
+            animation: sectionIn 0.5s ease forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes sectionIn {
+            from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        /* Стили карточек */
         .card {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 35px;
+            background: rgba(15, 25, 35, 0.85);
+            border: 1px solid rgba(255, 70, 85, 0.3);
+            border-left: 4px solid var(--valorant-red);
+            padding: 35px 40px;
             margin-bottom: 25px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            border-left: 5px solid #4a90e2;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 0 100%);
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(142, 68, 173, 0.4);
-            border-left-color: #8e44ad;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 25px; height: 25px;
+            background: var(--valorant-red);
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
         }
 
         .card h2 {
-            font-size: 2rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            background: linear-gradient(90deg, #4a90e2, #8e44ad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--valorant-light);
+            position: relative;
+            padding-bottom: 12px;
         }
 
-        /* Текст, который печатается */
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--valorant-red), var(--dota-gold));
+            box-shadow: 0 0 10px var(--valorant-red);
+        }
+
         .typewriter {
             font-size: 1.15rem;
-            line-height: 1.8;
-            color: #ddd;
-            white-space: pre-wrap; /* Сохраняет переносы строк */
+            line-height: 1.9;
+            color: #c4c4c4;
+            white-space: pre-wrap;
+            font-weight: 500;
         }
 
-        /* Курсор для печатной машинки */
+        .typewriter b {
+            color: var(--dota-gold);
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(200, 170, 110, 0.5);
+        }
+
         .typewriter::after {
-            content: '|';
+            content: '_';
             animation: blink 0.8s infinite;
-            color: #4a90e2;
+            color: var(--valorant-red);
             font-weight: bold;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* --- РАЗДЕЛ ДРУЗЬЯ --- */
         .friends-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 25px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .friend-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            background: rgba(15, 25, 35, 0.9);
+            border: 1px solid rgba(255, 70, 85, 0.2);
             padding: 25px;
             text-align: center;
             transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
         }
 
-        .friend-card:hover {
-            background: rgba(142, 68, 173, 0.2);
-            transform: translateY(-8px) scale(1.03);
-            border-color: #8e44ad;
-            box-shadow: 0 10px 25px rgba(142, 68, 173, 0.4);
-        }
-
-        /* Круглое фото друга */
         .friend-photo {
-            width: 120px;
-            height: 120px;
+            width: 120px; height: 120px;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid #4a90e2;
+            border: 3px solid var(--valorant-red);
             margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
-            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 0 25px rgba(255, 70, 85, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #2a2a40;
+            background: #1a2634;
         }
 
-        .friend-card:hover .friend-photo {
-            transform: scale(1.1) rotate(5deg);
-            border-color: #8e44ad;
-            box-shadow: 0 0 30px rgba(142, 68, 173, 0.7);
+        .friend-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .friend-photo .placeholder-icon { width: 60px; height: 60px; fill: #555; }
+
+        .friend-card h3 {
+            font-family: 'Oswald', sans-serif;
+            color: #fff;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
         }
 
-        .friend-photo img {
+        .friend-card p { color: #888; font-size: 0.95rem; letter-spacing: 1px; }
+
+        /* --- ИГРА --- */
+        #gameContainer {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: #000;
+            border: 2px solid var(--valorant-red);
+            overflow: hidden;
+            cursor: crosshair;
+            box-shadow: inset 0 0 60px rgba(255, 70, 85, 0.2);
+            user-select: none;
+        }
+
+        #crosshair {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px; height: 24px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #crosshair::before, #crosshair::after {
+            content: '';
+            position: absolute;
+            background: #FF4655;
+            box-shadow: 0 0 10px rgba(255, 70, 85, 0.9);
+        }
+
+        #crosshair::before { top: 50%; left: 0; width: 100%; height: 2px; transform: translateY(-50%); }
+        #crosshair::after { left: 50%; top: 0; width: 2px; height: 100%; transform: translateX(-50%); }
+
+        #gameHUD {
+            position: absolute;
+            top: 15px; left: 15px;
+            color: #FF4655;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 70, 85, 0.8);
+            z-index: 10;
+            user-select: none;
+        }
+
+        #gameHint {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255, 70, 85, 0.9);
+            z-index: 20;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        #gameHint span { font-size: 1rem; color: #C8AA6E; }
+
+        /* ====== СКРИМЕР (ДЖЕФФ) ====== */
+        #screamer {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #screamer.active { display: flex; }
+
+        #screamer .flash {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #ff0000;
+            animation: flashAnim 0.15s ease-in-out 4;
+            z-index: 2;
+        }
+
+        @keyframes flashAnim {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        #screamer .face {
+            position: relative;
+            width: 90vmin;
+            height: 90vmin;
+            max-width: 700px;
+            max-height: 700px;
+            animation: screamerAnim 1.5s ease-out forwards;
+            filter: drop-shadow(0 0 40px #ff0000) contrast(1.6) brightness(1.1);
+            z-index: 1;
+        }
+
+        #screamer .face img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            border-radius: 50%;
         }
 
-        .friend-card:hover .friend-photo img {
-            transform: scale(1.1);
+        @keyframes screamerAnim {
+            0% { transform: scale(0.2) rotate(-20deg); opacity: 0; }
+            8% { transform: scale(1.4) rotate(8deg); opacity: 1; }
+            15% { transform: scale(1.1) rotate(-5deg); }
+            25% { transform: scale(1.35) rotate(6deg); }
+            35% { transform: scale(1.15) rotate(-3deg); }
+            45% { transform: scale(1.3) rotate(5deg); }
+            55% { transform: scale(1.2) rotate(-2deg); }
+            100% { transform: scale(1.8) rotate(0deg); opacity: 0; }
         }
 
-        /* Заглушка, если нет фото */
-        .friend-photo .placeholder-icon {
-            width: 60px;
-            height: 60px;
-            fill: #555;
+        body.shake { animation: shakeAnim 0.5s ease-in-out; }
+
+        @keyframes shakeAnim {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(-12px, -10px) rotate(-1.5deg); }
+            20% { transform: translate(14px, 8px) rotate(1.5deg); }
+            30% { transform: translate(-10px, 12px) rotate(-1.5deg); }
+            40% { transform: translate(12px, -8px) rotate(1.5deg); }
+            50% { transform: translate(-8px, 10px) rotate(-1.5deg); }
+            60% { transform: translate(10px, 6px) rotate(1.5deg); }
+            70% { transform: translate(-6px, -8px) rotate(-1.5deg); }
+            80% { transform: translate(8px, 5px) rotate(1.5deg); }
+            90% { transform: translate(-3px, -3px) rotate(0deg); }
         }
 
-        .friend-card h3 {
-            color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .friend-card:hover h3 {
-            color: #4a90e2;
-        }
-
-        .friend-card p {
-            color: #aaa;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-
-        .friend-card:hover p {
-            color: #ddd;
-        }
-
-        /* --- ПОДВАЛ (FOOTER) --- */
         footer {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(15px);
+            background: rgba(15, 25, 35, 0.95);
+            border-top: 2px solid var(--valorant-red);
             padding: 25px 20px;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: center;
             gap: 40px;
             flex-wrap: wrap;
-            font-size: 1.1rem;
+            box-shadow: 0 -4px 30px rgba(255, 70, 85, 0.3);
         }
 
         .contact-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            color: #ddd;
+            color: #ccc;
             transition: all 0.3s ease;
             text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
         }
 
-        .contact-item:hover {
-            color: #fff;
-            text-shadow: 0 0 15px rgba(74, 144, 226, 0.8);
-            transform: scale(1.05);
-        }
+        .contact-item:hover { color: var(--valorant-red); transform: scale(1.05); }
+        .contact-item svg { width: 24px; height: 24px; fill: var(--valorant-red); transition: all 0.3s ease; }
+        .contact-item:hover svg { transform: rotate(15deg) scale(1.2); fill: var(--dota-gold); }
+        .contact-item .telegram-icon { fill: #0088cc; }
 
-        .contact-item svg {
-            width: 24px;
-            height: 24px;
-            fill: #4a90e2;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-item:hover svg {
-            transform: rotate(15deg) scale(1.2);
-        }
-
-        .contact-item .telegram-icon {
-            fill: #0088cc;
-        }
-
-        /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 768px) {
-            header .col span {
-                font-size: 0.8rem;
-            }
-            .icon-circle {
-                width: 50px;
-                height: 50px;
-            }
-            .icon-circle svg {
-                width: 24px;
-                height: 24px;
-            }
-            .card h2 {
-                font-size: 1.5rem;
-            }
-            .card {
-                padding: 25px;
-            }
-            footer {
-                flex-direction: column;
-                gap: 15px;
-            }
+            header .col span { font-size: 0.65rem; letter-spacing: 1px; }
+            .icon-circle { width: 45px; height: 45px; }
+            .icon-circle svg { width: 20px; height: 20px; }
+            .card { padding: 25px; }
+            .card h2 { font-size: 1.4rem; }
+            footer { flex-direction: column; gap: 15px; }
+            #gameContainer { height: 350px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Шапка сайта (3 раздела) -->
     <header>
         <div class="col active" onclick="showSection('about', this)">
-            <div class="icon-circle">
-                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            </div>
-            <span>Обо мне</span>
+            <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+            <span>Профиль</span>
         </div>
         <div class="col" onclick="showSection('games', this)">
-            <div class="icon-circle">
-                <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-            </div>
-            <span>Игры</span>
+            <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></div>
+            <span>Мои игры</span>
         </div>
         <div class="col" onclick="showSection('friends', this)">
-            <div class="icon-circle">
-                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-            </div>
-            <span>Друзья</span>
+            <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+            <span>Тиммейты</span>
+        </div>
+        <div class="col" onclick="showSection('game', this)">
+            <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></div>
+            <span>Игра</span>
         </div>
     </header>
 
-    <!-- Основной контент -->
     <main>
-        <!-- Раздел 1: Обо мне -->
         <section id="about" class="section active">
             <div class="card">
-                <h2>Привет, я Илья!</h2>
+                <h2>// Профиль игрока</h2>
                 <div class="typewriter" id="text-about">
-                    Меня зовут Илья Моисеев. Я родился 21 августа 2008 года.
-                    Сейчас я учусь на 3 курсе в Ульяновском колледже — КЭИ (Колледж экономики и информатики).
-                    Я обычный парень, который любит проводить время с друзьями, играть в игры и просто наслаждаться жизнью.
-                    Этот сайт — небольшая история обо мне и моих близких.
+Меня зовут Илья Моисеев. Я родился 21 августа 2008 года.
+Сейчас я учусь на 3 курсе в Ульяновском колледже — КЭИ (Колледж экономики и информатики).
+Я обычный парень, который любит проводить время с друзьями, играть в игры и просто наслаждаться жизнью.
+Этот сайт — небольшая история обо мне и моих близких.
                 </div>
             </div>
         </section>
 
-        <!-- Раздел 2: Игры -->
         <section id="games" class="section">
             <div class="card">
-                <h2>Мои игры</h2>
+                <h2>// Мои игры</h2>
                 <div class="typewriter" id="text-games">
-                    Я большой фанат двух игр: <b>Valorant</b> и <b>Dota 2</b>.
-                    
-                    В <b>Valorant</b> я люблю динамичные перестрелки, тактику и командную работу. 
-                    Каждый матч — это новый вызов, где нужно быстро принимать решения и чувствовать своих тиммейтов.
-                    
-                    В <b>Dota 2</b> меня привлекает глубина стратегии, множество героев и бесконечные возможности для комбинаций. 
-                    Это игра, где можно постоянно учиться чему-то новому, даже спустя сотни часов.
-                    
-                    Игры для меня — это не просто развлечение, а способ отдохнуть, посоревноваться и провести время с друзьями.
+Я большой фанат двух игр: <b>Valorant</b> и <b>Dota 2</b>.
+
+В <b>Valorant</b> я люблю динамичные перестрелки, тактику и командную работу.
+Каждый матч — это новый вызов, где нужно быстро принимать решения и чувствовать своих тиммейтов.
+
+В <b>Dota 2</b> меня привлекает глубина стратегии, множество героев и бесконечные возможности для комбинаций.
+Это игра, где можно постоянно учиться чему-то новому, даже спустя сотни часов.
+
+Игры для меня — это не просто развлечение, а способ отдохнуть, посоревноваться и провести время с друзьями.
                 </div>
             </div>
         </section>
 
-        <!-- Раздел 3: Друзья -->
         <section id="friends" class="section">
             <div class="card">
-                <h2>Мои друзья</h2>
+                <h2>// Мои тиммейты</h2>
                 <div class="typewriter" id="text-friends">
-                    У меня есть самые лучшие друзья на свете. Они всегда рядом, поддерживают и делают мою жизнь ярче.
-                    Вот они — люди, которым я доверяю и с которыми всегда весело.
+У меня есть самые лучшие друзья на свете. Они всегда рядом, поддерживают и делают мою жизнь ярче.
+Вот они — люди, которым я доверяю и с которыми всегда весело.
                 </div>
             </div>
-            
             <div class="friends-grid">
-                <!-- Артем -->
                 <div class="friend-card">
-                    <div class="friend-photo">
-                        <img src="artem.jpg" alt="Артем" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\'placeholder-icon\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                    </div>
-                    <h3>Артем</h3>
-                    <p>Надежный друг</p>
+                    <div class="friend-photo"><img src="artem.jpg" alt="Артем" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\'placeholder-icon\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';"></div>
+                    <h3>Артем</h3><p>Надежный друг</p>
                 </div>
-
-                <!-- Дима -->
                 <div class="friend-card">
-                    <div class="friend-photo">
-                        <img src="dima.jpg" alt="Дима" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\'placeholder-icon\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                    </div>
-                    <h3>Дима</h3>
-                    <p>Веселый и отзывчивый</p>
+                    <div class="friend-photo"><img src="dima.jpg" alt="Дима" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\'placeholder-icon\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';"></div>
+                    <h3>Дима</h3><p>Веселый и отзывчивый</p>
                 </div>
-
-                <!-- Айнур -->
                 <div class="friend-card">
-                    <div class="friend-photo">
-                        <img src="ainur.jpg" alt="Айнур" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\'placeholder-icon\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                    </div>
-                    <h3>Айнур</h3>
-                    <p>Мудрый и спокойный</p>
+                    <div class="friend-photo"><img src="ainur.jpg" alt="Айнур" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\'placeholder-icon\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';"></div>
+                    <h3>Айнур</h3><p>Мудрый и спокойный</p>
                 </div>
-
-                <!-- Амина -->
                 <div class="friend-card">
-                    <div class="friend-photo">
-                        <img src="amina.jpg" alt="Амина" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\'placeholder-icon\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                    </div>
-                    <h3>Амина</h3>
-                    <p>Яркая и позитивная</p>
+                    <div class="friend-photo"><img src="amina.jpg" alt="Амина" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\'placeholder-icon\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';"></div>
+                    <h3>Амина</h3><p>Яркая и позитивная</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="game" class="section">
+            <div class="card">
+                <h2>// Охота на пятки</h2>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem; letter-spacing: 1px;">
+                    WASD — движение &nbsp;|&nbsp; Мышь — обзор &nbsp;|&nbsp; ЛКМ — выстрел &nbsp;|&nbsp; Пробел — прыжок &nbsp;|&nbsp; Esc — выход
+                </p>
+                <div id="gameContainer">
+                    <div id="crosshair"></div>
+                    <div id="gameHUD">СЧЁТ: <span id="score">0</span></div>
+                    <div id="gameHint">КЛИКНИ ЧТОБЫ НАЧАТЬ<br><span>ОХОТУ НА ПЯТКИ</span></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Подвал сайта (Контакты) -->
     <footer>
         <a href="https://t.me/B0CKP3CENbE" target="_blank" class="contact-item">
             <svg class="telegram-icon" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
@@ -454,76 +524,61 @@
         </a>
     </footer>
 
-    <!-- JavaScript для переключения разделов и анимации текста -->
+    <!-- ===== СКРИМЕР (ДЖЕФФ-УБИЙЦА) ===== -->
+    <div id="screamer">
+        <div class="flash"></div>
+        <div class="face">
+            <img id="jeffImg" src="jeff.jpg" alt="Jeff the Killer">
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <script>
-        // Функция для переключения разделов
         function showSection(sectionId, clickedElement) {
-            // 1. Скрыть все секции
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('header .col').forEach(c => c.classList.remove('active'));
 
-            // 2. Убрать активный класс со всех иконок
-            const headerCols = document.querySelectorAll('header .col');
-            headerCols.forEach(col => col.classList.remove('active'));
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.add('active');
+            if (clickedElement) clickedElement.classList.add('active');
 
-            // 3. Показать нужную секцию
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
+            if (sectionId === 'game') {
+                setTimeout(() => {
+                    if (typeof initGame === 'function') initGame();
+                }, 150);
+            } else {
+                startTypewriter(sectionId);
             }
-
-            // 4. Активировать нажатую иконку
-            if (clickedElement) {
-                clickedElement.classList.add('active');
-            }
-
-            // 5. Запустить анимацию печати для этой секции
-            startTypewriter(sectionId);
         }
 
-        // --- АНИМАЦИЯ ТЕКСТА ПО БУКВАМ ---
         const typewriterTimeouts = {};
 
         function startTypewriter(sectionId) {
             const textElement = document.querySelector(`#${sectionId} .typewriter`);
             if (!textElement) return;
+            if (typewriterTimeouts[sectionId]) clearInterval(typewriterTimeouts[sectionId]);
 
-            // Останавливаем предыдущую анимацию
-            if (typewriterTimeouts[sectionId]) {
-                clearInterval(typewriterTimeouts[sectionId]);
-            }
-
-            // Сохраняем полный HTML-текст (с тегами <b>)
             if (!textElement.dataset.fullText) {
                 textElement.dataset.fullText = textElement.innerHTML.trim();
             }
-            
+
             const fullText = textElement.dataset.fullText;
             let currentIndex = 0;
             textElement.innerHTML = '';
 
-            // Разбиваем текст на символы, но сохраняем HTML-теги как единое целое
-            // Это нужно, чтобы теги <b> не разрывались
             const chars = [];
             let i = 0;
             while (i < fullText.length) {
                 if (fullText[i] === '<') {
-                    // Нашли тег — ищем его закрытие
                     let tagEnd = fullText.indexOf('>', i);
                     if (tagEnd !== -1) {
                         chars.push(fullText.substring(i, tagEnd + 1));
                         i = tagEnd + 1;
-                    } else {
-                        chars.push(fullText[i]);
-                        i++;
-                    }
-                } else {
-                    chars.push(fullText[i]);
-                    i++;
-                }
+                    } else { chars.push(fullText[i]); i++; }
+                } else { chars.push(fullText[i]); i++; }
             }
 
-            // Запускаем печать
             typewriterTimeouts[sectionId] = setInterval(() => {
                 if (currentIndex < chars.length) {
                     textElement.innerHTML += chars[currentIndex];
@@ -534,11 +589,377 @@
             }, 15);
         }
 
-        // Запускаем анимацию для стартового раздела при загрузке
-        window.onload = function() {
-            startTypewriter('about');
-        };
+        window.addEventListener('load', function() { startTypewriter('about'); });
     </script>
+
+    <script>
+        let gameInitialized = false;
+        let scene, camera, renderer, raycaster;
+        let feet = [];
+        let score = 0;
+        let velocity = new THREE.Vector3();
+        let moveState = { forward: false, backward: false, left: false, right: false };
+        let isLocked = false;
+        let clock;
+
+        // === ПРЕДЗАГРУЗКА ЗВУКА ЧЕРЕЗ BLOB (мгновенное воспроизведение) ===
+        let roarBlobUrl = null;
+        let roarReady = false;
+
+        fetch('roar.mp3')
+            .then(r => r.blob())
+            .then(blob => {
+                roarBlobUrl = URL.createObjectURL(blob);
+                roarReady = true;
+            })
+            .catch(() => {
+                roarBlobUrl = 'roar.mp3';
+                roarReady = true;
+            });
+
+        // Предзагрузка картинки Джеффа
+        const jeffPreload = new Image();
+        jeffPreload.src = 'jeff.jpg';
+
+        function initGame() {
+            const container = document.getElementById('gameContainer');
+            if (!container) return;
+
+            if (!gameInitialized) {
+                gameInitialized = true;
+
+                const width = container.clientWidth;
+                const height = container.clientHeight;
+
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color(0x0F1923);
+                scene.fog = new THREE.Fog(0x0F1923, 15, 80);
+
+                camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+                camera.position.set(0, 1.7, 0);
+                camera.rotation.order = 'YXZ';
+
+                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(width, height);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+                const oldCanvas = container.querySelector('canvas');
+                if (oldCanvas) oldCanvas.remove();
+                container.appendChild(renderer.domElement);
+
+                const gridHelper = new THREE.GridHelper(120, 60, 0xFF4655, 0x2a2a40);
+                scene.add(gridHelper);
+
+                scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+                const dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
+                dirLight.position.set(10, 25, 10);
+                scene.add(dirLight);
+
+                const pointLight = new THREE.PointLight(0xFF4655, 1, 50);
+                pointLight.position.set(0, 10, 0);
+                scene.add(pointLight);
+
+                raycaster = new THREE.Raycaster();
+                clock = new THREE.Clock();
+
+                for (let i = 0; i < 15; i++) createFoot();
+                bindGameEvents(container);
+                animate();
+            } else {
+                const width = container.clientWidth;
+                const height = container.clientHeight;
+                if (renderer && camera) {
+                    renderer.setSize(width, height);
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                }
+            }
+        }
+
+        function bindGameEvents(container) {
+            container.addEventListener('click', () => {
+                document.getElementById('gameHint').style.display = 'none';
+
+                // Разблокировка аудио через AudioContext (без воспроизведения)
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    if (ctx.state === 'suspended') ctx.resume();
+                } catch(e) {}
+
+                if (container.requestPointerLock) {
+                    container.requestPointerLock();
+                } else {
+                    isLocked = true;
+                }
+            });
+
+            document.addEventListener('pointerlockchange', () => {
+                isLocked = (document.pointerLockElement === container);
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isLocked || !camera) return;
+                camera.rotation.y -= e.movementX * 0.002;
+                camera.rotation.x -= e.movementY * 0.002;
+                camera.rotation.x = Math.max(-Math.PI/2 + 0.1, Math.min(Math.PI/2 - 0.1, camera.rotation.x));
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!isLocked) return;
+                switch(e.code) {
+                    case 'KeyW': moveState.forward = true; break;
+                    case 'KeyS': moveState.backward = true; break;
+                    case 'KeyA': moveState.left = true; break;
+                    case 'KeyD': moveState.right = true; break;
+                    case 'Space':
+                        if (camera.position.y <= 1.75) velocity.y = 7;
+                        break;
+                }
+            });
+
+            document.addEventListener('keyup', (e) => {
+                switch(e.code) {
+                    case 'KeyW': moveState.forward = false; break;
+                    case 'KeyS': moveState.backward = false; break;
+                    case 'KeyA': moveState.left = false; break;
+                    case 'KeyD': moveState.right = false; break;
+                }
+            });
+
+            document.addEventListener('mousedown', (e) => {
+                if (isLocked && e.button === 0) shoot();
+            });
+        }
+
+        function createFoot() {
+            const group = new THREE.Group();
+            const geometry = new THREE.SphereGeometry(0.6, 16, 16);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0xFFD700, shininess: 100, emissive: 0x6b5000
+            });
+            group.add(new THREE.Mesh(geometry, material));
+
+            for (let i = 0; i < 5; i++) {
+                const fGeo = new THREE.SphereGeometry(0.16, 8, 8);
+                const fMat = new THREE.MeshPhongMaterial({ color: 0xFFA500 });
+                const finger = new THREE.Mesh(fGeo, fMat);
+                const angle = (i / 5) * Math.PI * 2;
+                finger.position.set(Math.cos(angle) * 0.75, Math.sin(angle) * 0.75, 0.4);
+                group.add(finger);
+            }
+
+            group.position.set(
+                (Math.random() - 0.5) * 60,
+                4 + Math.random() * 8,
+                (Math.random() - 0.5) * 60
+            );
+
+            group.userData = {
+                baseY: group.position.y,
+                floatSpeed: 0.5 + Math.random(),
+                phase: Math.random() * Math.PI * 2,
+                moveAngle: Math.random() * Math.PI * 2,
+                speed: 0.3 + Math.random() * 0.5
+            };
+
+            scene.add(group);
+            feet.push(group);
+        }
+
+        function shoot() {
+            playShootSound();
+            raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+            const intersects = raycaster.intersectObjects(feet, true);
+            if (intersects.length > 0) {
+                let hit = intersects[0].object;
+                while (hit.parent && !feet.includes(hit)) hit = hit.parent;
+                if (feet.includes(hit)) removeFoot(hit);
+            }
+        }
+
+        function removeFoot(foot) {
+            scene.remove(foot);
+            const idx = feet.indexOf(foot);
+            if (idx > -1) feet.splice(idx, 1);
+            score++;
+            document.getElementById('score').textContent = score;
+
+            // СКРИМЕР ПРИ УБИЙСТВЕ
+            triggerScreamer();
+
+            setTimeout(createFoot, 2000);
+        }
+
+        // ===== СКРИМЕР =====
+        function triggerScreamer() {
+            const screamer = document.getElementById('screamer');
+            if (!screamer) return;
+
+            screamer.classList.add('active');
+            playScreamSound();
+            document.body.classList.add('shake');
+
+            if (navigator.vibrate) {
+                navigator.vibrate([300, 100, 300, 100, 500]);
+            }
+
+            setTimeout(() => {
+                screamer.classList.remove('active');
+                document.body.classList.remove('shake');
+            }, 1500);
+        }
+
+        // ===== ЗВУК: РЁВ МОНСТРА (МГНОВЕННО ИЗ BLOB) =====
+        function playScreamSound() {
+            try {
+                if (!roarReady) {
+                    // Если blob ещё не готов — используем прямой путь
+                    const fallback = new Audio('roar.mp3');
+                    fallback.volume = 0.9;
+                    fallback.play().catch(() => playSynthScream());
+                    return;
+                }
+                const audio = new Audio(roarBlobUrl);
+                audio.volume = 0.9;
+                audio.play().catch(() => playSynthScream());
+            } catch(e) {
+                playSynthScream();
+            }
+        }
+
+        // Резервный синтезированный рёв
+        function playSynthScream() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const now = audioCtx.currentTime;
+
+                const bufferSize = audioCtx.sampleRate * 1.2;
+                const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = noiseBuffer;
+
+                const noiseFilter = audioCtx.createBiquadFilter();
+                noiseFilter.type = 'lowpass';
+                noiseFilter.frequency.value = 800;
+                noiseFilter.Q.value = 5;
+
+                const noiseGain = audioCtx.createGain();
+                noiseGain.gain.setValueAtTime(0.4, now);
+                noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+                noise.connect(noiseFilter);
+                noiseFilter.connect(noiseGain);
+                noiseGain.connect(audioCtx.destination);
+                noise.start(now);
+                noise.stop(now + 1.2);
+
+                const osc1 = audioCtx.createOscillator();
+                osc1.type = 'sawtooth';
+                osc1.frequency.setValueAtTime(80, now);
+                osc1.frequency.linearRampToValueAtTime(40, now + 1.0);
+
+                const osc1Gain = audioCtx.createGain();
+                osc1Gain.gain.setValueAtTime(0.3, now);
+                osc1Gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+                osc1.connect(osc1Gain);
+                osc1Gain.connect(audioCtx.destination);
+                osc1.start(now);
+                osc1.stop(now + 1.2);
+
+                const osc2 = audioCtx.createOscillator();
+                osc2.type = 'sawtooth';
+                osc2.frequency.setValueAtTime(2000, now);
+                osc2.frequency.exponentialRampToValueAtTime(400, now + 0.8);
+
+                const osc2Gain = audioCtx.createGain();
+                osc2Gain.gain.setValueAtTime(0.15, now);
+                osc2Gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+
+                osc2.connect(osc2Gain);
+                osc2Gain.connect(audioCtx.destination);
+                osc2.start(now);
+                osc2.stop(now + 0.8);
+            } catch(e) {}
+        }
+
+        function playShootSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.12);
+            } catch(e) {}
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (!renderer || !scene || !camera) return;
+
+            if (!isLocked) {
+                renderer.render(scene, camera);
+                return;
+            }
+
+            const delta = Math.min(clock.getDelta(), 0.1);
+            velocity.y -= 30 * delta;
+
+            const speed = 15;
+            const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+            const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+            forward.y = 0; forward.normalize();
+            right.y = 0; right.normalize();
+
+            const moveDelta = new THREE.Vector3();
+            if (moveState.forward) moveDelta.add(forward);
+            if (moveState.backward) moveDelta.sub(forward);
+            if (moveState.right) moveDelta.add(right);
+            if (moveState.left) moveDelta.sub(right);
+            moveDelta.normalize().multiplyScalar(speed * delta);
+
+            camera.position.x += moveDelta.x;
+            camera.position.z += moveDelta.z;
+            camera.position.y += velocity.y * delta;
+
+            if (camera.position.y < 1.7) {
+                velocity.y = 0;
+                camera.position.y = 1.7;
+            }
+
+            const t = Date.now() * 0.001;
+            feet.forEach(foot => {
+                foot.position.y = foot.userData.baseY + Math.sin(t * foot.userData.floatSpeed + foot.userData.phase) * 1.5;
+                foot.rotation.y += 0.02;
+                foot.rotation.x = Math.sin(t * 0.5) * 0.3;
+
+                foot.userData.moveAngle += 0.005;
+                foot.position.x += Math.cos(foot.userData.moveAngle) * foot.userData.speed * delta * 3;
+                foot.position.z += Math.sin(foot.userData.moveAngle) * foot.userData.speed * delta * 3;
+
+                if (Math.abs(foot.position.x) > 55 || Math.abs(foot.position.z) > 55) {
+                    foot.position.x = (Math.random() - 0.5) * 40;
+                    foot.position.z = (Math.random() - 0.5) * 40;
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+    </script>
+
+</body>
+</html>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>ILYAMOISEEV // GAMER PROFILE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Oswald:wght@500;700&display=swap');
@@ -14,6 +14,12 @@
             --valorant-dark: #0F1923;
             --valorant-light: #ECE8E1;
             --dota-gold: #C8AA6E;
+        }
+
+        html, body {
+            touch-action: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         body {
@@ -254,6 +260,7 @@
             cursor: crosshair;
             box-shadow: inset 0 0 60px rgba(255, 70, 85, 0.2);
             user-select: none;
+            touch-action: none;
         }
 
         #crosshair {
@@ -304,7 +311,111 @@
 
         #gameHint span { font-size: 1rem; color: #C8AA6E; }
 
-        /* ====== СКРИМЕР (ДЖЕФФ) ====== */
+        /* ===== МОБИЛЬНОЕ УПРАВЛЕНИЕ ===== */
+        #mobileControls {
+            display: none;
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        /* Джойстик */
+        #joystick {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: rgba(255, 70, 85, 0.15);
+            border: 2px solid rgba(255, 70, 85, 0.5);
+            pointer-events: auto;
+            touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #joystickKnob {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255, 70, 85, 0.7);
+            border: 2px solid #FF4655;
+            box-shadow: 0 0 20px rgba(255, 70, 85, 0.8);
+            transition: transform 0.05s linear;
+        }
+
+        /* Кнопка выстрела */
+        #fireBtn {
+            position: absolute;
+            right: 25px;
+            bottom: 35px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: rgba(255, 70, 85, 0.5);
+            border: 3px solid #FF4655;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 25px rgba(255, 70, 85, 0.7);
+            pointer-events: auto;
+            touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        #fireBtn:active {
+            background: rgba(255, 70, 85, 0.9);
+            transform: scale(0.95);
+        }
+
+        /* Кнопка прыжка */
+        #jumpBtn {
+            position: absolute;
+            right: 130px;
+            bottom: 55px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(200, 170, 110, 0.4);
+            border: 3px solid #C8AA6E;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(200, 170, 110, 0.5);
+            pointer-events: auto;
+            touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        #jumpBtn:active {
+            background: rgba(200, 170, 110, 0.8);
+            transform: scale(0.95);
+        }
+
+        /* Показываем мобильное управление только на сенсорных устройствах */
+        @media (pointer: coarse) {
+            #mobileControls {
+                display: block;
+            }
+            #gameHint {
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        /* ====== СКРИМЕР ====== */
         #screamer {
             position: fixed;
             top: 0; left: 0;
@@ -415,7 +526,7 @@
             .card { padding: 25px; }
             .card h2 { font-size: 1.4rem; }
             footer { flex-direction: column; gap: 15px; }
-            #gameContainer { height: 350px; }
+            #gameContainer { height: 70vh; min-height: 400px; }
         }
     </style>
 </head>
@@ -502,12 +613,22 @@
             <div class="card">
                 <h2>// Охота на пятки</h2>
                 <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem; letter-spacing: 1px;">
-                    WASD — движение &nbsp;|&nbsp; Мышь — обзор &nbsp;|&nbsp; ЛКМ — выстрел &nbsp;|&nbsp; Пробел — прыжок &nbsp;|&nbsp; Esc — выход
+                    <span class="desktop-help">WASD — движение &nbsp;|&nbsp; Мышь — обзор &nbsp;|&nbsp; ЛКМ — выстрел &nbsp;|&nbsp; Пробел — прыжок &nbsp;|&nbsp; Esc — выход</span>
+                    <span class="mobile-help" style="display:none;">Джойстик — движение &nbsp;|&nbsp; Свайп справа — обзор &nbsp;|&nbsp; ОГОНЬ — выстрел &nbsp;|&nbsp; ПРЫЖОК — прыжок</span>
                 </p>
                 <div id="gameContainer">
                     <div id="crosshair"></div>
                     <div id="gameHUD">СЧЁТ: <span id="score">0</span></div>
                     <div id="gameHint">КЛИКНИ ЧТОБЫ НАЧАТЬ<br><span>ОХОТУ НА ПЯТКИ</span></div>
+
+                    <!-- Мобильное управление -->
+                    <div id="mobileControls">
+                        <div id="joystick">
+                            <div id="joystickKnob"></div>
+                        </div>
+                        <div id="jumpBtn">ПРЫЖОК</div>
+                        <div id="fireBtn">ОГОНЬ</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -535,6 +656,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
+        // Показ подсказки в зависимости от устройства
+        if (window.matchMedia('(pointer: coarse)').matches) {
+            document.querySelector('.desktop-help').style.display = 'none';
+            document.querySelector('.mobile-help').style.display = 'inline';
+        }
+
         function showSection(sectionId, clickedElement) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('header .col').forEach(c => c.classList.remove('active'));
@@ -602,28 +729,31 @@
         let isLocked = false;
         let clock;
 
-        // === ПРЕДЗАГРУЗКА ЗВУКА ЧЕРЕЗ BLOB (мгновенное воспроизведение) ===
+        // Мобильное управление
+        let isMobile = false;
+        let joystickActive = false;
+        let joystickVector = { x: 0, y: 0 };
+        let lookTouchId = null;
+        let lastLookX = 0;
+        let lastLookY = 0;
+
+        // === ПРЕДЗАГРУЗКА ЗВУКА ЧЕРЕЗ BLOB ===
         let roarBlobUrl = null;
         let roarReady = false;
-
         fetch('roar.mp3')
             .then(r => r.blob())
-            .then(blob => {
-                roarBlobUrl = URL.createObjectURL(blob);
-                roarReady = true;
-            })
-            .catch(() => {
-                roarBlobUrl = 'roar.mp3';
-                roarReady = true;
-            });
+            .then(blob => { roarBlobUrl = URL.createObjectURL(blob); roarReady = true; })
+            .catch(() => { roarBlobUrl = 'roar.mp3'; roarReady = true; });
 
-        // Предзагрузка картинки Джеффа
         const jeffPreload = new Image();
         jeffPreload.src = 'jeff.jpg';
 
         function initGame() {
             const container = document.getElementById('gameContainer');
             if (!container) return;
+
+            // Определяем мобильное устройство
+            isMobile = window.matchMedia('(pointer: coarse)').matches;
 
             if (!gameInitialized) {
                 gameInitialized = true;
@@ -664,6 +794,7 @@
 
                 for (let i = 0; i < 15; i++) createFoot();
                 bindGameEvents(container);
+                if (isMobile) bindMobileControls(container);
                 animate();
             } else {
                 const width = container.clientWidth;
@@ -677,15 +808,14 @@
         }
 
         function bindGameEvents(container) {
+            // === Управление с ПК ===
             container.addEventListener('click', () => {
+                if (isMobile) return;
                 document.getElementById('gameHint').style.display = 'none';
-
-                // Разблокировка аудио через AudioContext (без воспроизведения)
                 try {
                     const ctx = new (window.AudioContext || window.webkitAudioContext)();
                     if (ctx.state === 'suspended') ctx.resume();
                 } catch(e) {}
-
                 if (container.requestPointerLock) {
                     container.requestPointerLock();
                 } else {
@@ -694,30 +824,29 @@
             });
 
             document.addEventListener('pointerlockchange', () => {
-                isLocked = (document.pointerLockElement === container);
+                if (!isMobile) isLocked = (document.pointerLockElement === container);
             });
 
             document.addEventListener('mousemove', (e) => {
-                if (!isLocked || !camera) return;
+                if (isMobile || !isLocked || !camera) return;
                 camera.rotation.y -= e.movementX * 0.002;
                 camera.rotation.x -= e.movementY * 0.002;
                 camera.rotation.x = Math.max(-Math.PI/2 + 0.1, Math.min(Math.PI/2 - 0.1, camera.rotation.x));
             });
 
             document.addEventListener('keydown', (e) => {
-                if (!isLocked) return;
+                if (isMobile || !isLocked) return;
                 switch(e.code) {
                     case 'KeyW': moveState.forward = true; break;
                     case 'KeyS': moveState.backward = true; break;
                     case 'KeyA': moveState.left = true; break;
                     case 'KeyD': moveState.right = true; break;
-                    case 'Space':
-                        if (camera.position.y <= 1.75) velocity.y = 7;
-                        break;
+                    case 'Space': if (camera.position.y <= 1.75) velocity.y = 7; break;
                 }
             });
 
             document.addEventListener('keyup', (e) => {
+                if (isMobile) return;
                 switch(e.code) {
                     case 'KeyW': moveState.forward = false; break;
                     case 'KeyS': moveState.backward = false; break;
@@ -727,8 +856,124 @@
             });
 
             document.addEventListener('mousedown', (e) => {
+                if (isMobile) return;
                 if (isLocked && e.button === 0) shoot();
             });
+        }
+
+        // === Управление с ТЕЛЕФОНА ===
+        function bindMobileControls(container) {
+            const joystick = document.getElementById('joystick');
+            const knob = document.getElementById('joystickKnob');
+            const fireBtn = document.getElementById('fireBtn');
+            const jumpBtn = document.getElementById('jumpBtn');
+            const hint = document.getElementById('gameHint');
+
+            // Убираем подсказку и запускаем игру при первом касании
+            container.addEventListener('touchstart', (e) => {
+                if (hint.style.display !== 'none') {
+                    hint.style.display = 'none';
+                    isLocked = true;
+                    try {
+                        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                        if (ctx.state === 'suspended') ctx.resume();
+                    } catch(err) {}
+                }
+            }, { passive: true });
+
+            // === Джойстик ===
+            const joyRadius = 65; // радиус джойстика в px (половина от 130)
+            let joyCenter = { x: 0, y: 0 };
+
+            joystick.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                joystickActive = true;
+                const rect = joystick.getBoundingClientRect();
+                joyCenter = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+            }, { passive: false });
+
+            joystick.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!joystickActive) return;
+                const touch = e.touches[0];
+                let dx = touch.clientX - joyCenter.x;
+                let dy = touch.clientY - joyCenter.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist > joyRadius) {
+                    dx = dx / dist * joyRadius;
+                    dy = dy / dist * joyRadius;
+                }
+                knob.style.transform = `translate(${dx}px, ${dy}px)`;
+                joystickVector.x = dx / joyRadius;
+                joystickVector.y = dy / joyRadius;
+            }, { passive: false });
+
+            const resetJoystick = (e) => {
+                e.preventDefault();
+                joystickActive = false;
+                knob.style.transform = 'translate(0, 0)';
+                joystickVector.x = 0;
+                joystickVector.y = 0;
+            };
+
+            joystick.addEventListener('touchend', resetJoystick);
+            joystick.addEventListener('touchcancel', resetJoystick);
+
+            // === Обзор (свайп на правой части экрана) ===
+            container.addEventListener('touchstart', (e) => {
+                for (const t of e.changedTouches) {
+                    const rect = container.getBoundingClientRect();
+                    // Игнорируем касания по джойстику и кнопкам
+                    const target = document.elementFromPoint(t.clientX, t.clientY);
+                    if (target && (target.closest('#joystick') || target.closest('#fireBtn') || target.closest('#jumpBtn'))) continue;
+
+                    if (t.clientX > rect.left + rect.width * 0.4) {
+                        lookTouchId = t.identifier;
+                        lastLookX = t.clientX;
+                        lastLookY = t.clientY;
+                    }
+                }
+            }, { passive: true });
+
+            container.addEventListener('touchmove', (e) => {
+                for (const t of e.changedTouches) {
+                    if (t.identifier === lookTouchId && camera) {
+                        const dx = t.clientX - lastLookX;
+                        const dy = t.clientY - lastLookY;
+                        lastLookX = t.clientX;
+                        lastLookY = t.clientY;
+                        camera.rotation.y -= dx * 0.005;
+                        camera.rotation.x -= dy * 0.005;
+                        camera.rotation.x = Math.max(-Math.PI/2 + 0.1, Math.min(Math.PI/2 - 0.1, camera.rotation.x));
+                    }
+                }
+            }, { passive: true });
+
+            container.addEventListener('touchend', (e) => {
+                for (const t of e.changedTouches) {
+                    if (t.identifier === lookTouchId) lookTouchId = null;
+                }
+            }, { passive: true });
+
+            container.addEventListener('touchcancel', (e) => {
+                for (const t of e.changedTouches) {
+                    if (t.identifier === lookTouchId) lookTouchId = null;
+                }
+            }, { passive: true });
+
+            // === Кнопка выстрела ===
+            fireBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                shoot();
+            }, { passive: false });
+
+            // === Кнопка прыжка ===
+            jumpBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (camera && camera.position.y <= 1.75) velocity.y = 7;
+            }, { passive: false });
         }
 
         function createFoot() {
@@ -784,13 +1029,11 @@
             score++;
             document.getElementById('score').textContent = score;
 
-            // СКРИМЕР ПРИ УБИЙСТВЕ
             triggerScreamer();
 
             setTimeout(createFoot, 2000);
         }
 
-        // ===== СКРИМЕР =====
         function triggerScreamer() {
             const screamer = document.getElementById('screamer');
             if (!screamer) return;
@@ -809,11 +1052,9 @@
             }, 1500);
         }
 
-        // ===== ЗВУК: РЁВ МОНСТРА (МГНОВЕННО ИЗ BLOB) =====
         function playScreamSound() {
             try {
                 if (!roarReady) {
-                    // Если blob ещё не готов — используем прямой путь
                     const fallback = new Audio('roar.mp3');
                     fallback.volume = 0.9;
                     fallback.play().catch(() => playSynthScream());
@@ -827,7 +1068,6 @@
             }
         }
 
-        // Резервный синтезированный рёв
         function playSynthScream() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -836,9 +1076,7 @@
                 const bufferSize = audioCtx.sampleRate * 1.2;
                 const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
                 const output = noiseBuffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) {
-                    output[i] = Math.random() * 2 - 1;
-                }
+                for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
                 const noise = audioCtx.createBufferSource();
                 noise.buffer = noiseBuffer;
 
@@ -861,11 +1099,9 @@
                 osc1.type = 'sawtooth';
                 osc1.frequency.setValueAtTime(80, now);
                 osc1.frequency.linearRampToValueAtTime(40, now + 1.0);
-
                 const osc1Gain = audioCtx.createGain();
                 osc1Gain.gain.setValueAtTime(0.3, now);
                 osc1Gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
-
                 osc1.connect(osc1Gain);
                 osc1Gain.connect(audioCtx.destination);
                 osc1.start(now);
@@ -875,11 +1111,9 @@
                 osc2.type = 'sawtooth';
                 osc2.frequency.setValueAtTime(2000, now);
                 osc2.frequency.exponentialRampToValueAtTime(400, now + 0.8);
-
                 const osc2Gain = audioCtx.createGain();
                 osc2Gain.gain.setValueAtTime(0.15, now);
                 osc2Gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-
                 osc2.connect(osc2Gain);
                 osc2Gain.connect(audioCtx.destination);
                 osc2.start(now);
@@ -917,22 +1151,43 @@
             velocity.y -= 30 * delta;
 
             const speed = 15;
-            const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
-            const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
-            forward.y = 0; forward.normalize();
-            right.y = 0; right.normalize();
 
-            const moveDelta = new THREE.Vector3();
-            if (moveState.forward) moveDelta.add(forward);
-            if (moveState.backward) moveDelta.sub(forward);
-            if (moveState.right) moveDelta.add(right);
-            if (moveState.left) moveDelta.sub(right);
-            moveDelta.normalize().multiplyScalar(speed * delta);
+            if (isMobile) {
+                // === ДВИЖЕНИЕ С ДЖОЙСТИКА ===
+                if (joystickActive && (joystickVector.x !== 0 || joystickVector.y !== 0)) {
+                    const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+                    const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+                    forward.y = 0; forward.normalize();
+                    right.y = 0; right.normalize();
 
-            camera.position.x += moveDelta.x;
-            camera.position.z += moveDelta.z;
+                    const moveDelta = new THREE.Vector3();
+                    // joystickVector.y: -1 вверх (вперёд), +1 вниз (назад)
+                    moveDelta.addScaledVector(forward, -joystickVector.y);
+                    moveDelta.addScaledVector(right, joystickVector.x);
+                    moveDelta.normalize().multiplyScalar(speed * delta);
+
+                    camera.position.x += moveDelta.x;
+                    camera.position.z += moveDelta.z;
+                }
+            } else {
+                // === ДВИЖЕНИЕ С КЛАВИАТУРЫ ===
+                const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+                const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+                forward.y = 0; forward.normalize();
+                right.y = 0; right.normalize();
+
+                const moveDelta = new THREE.Vector3();
+                if (moveState.forward) moveDelta.add(forward);
+                if (moveState.backward) moveDelta.sub(forward);
+                if (moveState.right) moveDelta.add(right);
+                if (moveState.left) moveDelta.sub(right);
+                moveDelta.normalize().multiplyScalar(speed * delta);
+
+                camera.position.x += moveDelta.x;
+                camera.position.z += moveDelta.z;
+            }
+
             camera.position.y += velocity.y * delta;
-
             if (camera.position.y < 1.7) {
                 velocity.y = 0;
                 camera.position.y = 1.7;
@@ -960,6 +1215,4 @@
 
 </body>
 </html>
-
-</body>
 </html>
